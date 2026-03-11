@@ -1,0 +1,17 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        String num = Integer.toBinaryString(n);
+        StringBuilder sb = new StringBuilder();
+        for(char c : num.toCharArray()){
+            if(c == '0'){
+                sb.append('1');
+            }else{
+                sb.append('0');
+            }
+        }
+        String res = sb.toString();
+        int result = Integer.parseInt(res,2);
+        return result;
+
+    }
+}
