@@ -1,0 +1,24 @@
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+        List<Integer> list = new ArrayList<>();
+        int ref = grid[0][0] % x;
+        // Check whether all element have same remainder or not
+        for(int[] nums : grid) {
+            for(int num : nums){
+                if(num % x != ref){
+                    return -1;
+                }
+                list.add(num);
+            }
+        }
+        // Sort the list to find the middle element 
+        Collections.sort(list);
+        int med = list.get(list.size() / 2);
+        //Calculate the min operation
+        int total = 0;
+        for(int num : list){
+            total += Math.abs(num - med) / x;
+        }
+        return total;
+    }
+}
