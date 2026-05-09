@@ -1,0 +1,58 @@
+class Solution {
+    public int[][] rotateGrid(int[][] grid, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int top = 0;
+        int bottom = m - 1;
+
+        int left = 0;
+        int right = n - 1;
+        while(top < bottom && left < right){
+            List<Integer> list = new ArrayList<>();
+            //Traverse Top Row
+            for(int j = left; j<= right; j++){
+                list.add(grid[top][j]);
+            }
+            //Traverse Last Col
+            for(int i = top+1; i<=bottom; i++){
+                list.add(grid[i][right]);
+            }
+            //Traverse last row
+            for(int j = right-1; j>=left; j-- ){
+                list.add(grid[bottom][j]);
+            }
+            //Traverse first Col
+            for(int i = bottom-1; i>=top+1; i--){
+                list.add(grid[i][left]);
+            }
+            int rotate = k % list.size();
+
+            Collections.rotate(list, -rotate);
+
+            int idx = 0;
+            //Top row
+            for(int j = left; j<=right; j++){
+                grid[top][j] = list.get(idx++);
+            }
+            //Right Col
+            for(int i = top+1; i<= bottom; i++){
+                grid[i][right] = list.get(idx++);
+            }
+            //Last Row
+            for(int j = right-1; j>= left; j--){
+                grid[bottom][j] = list.get(idx++);
+            }
+            //First Col
+            for(int i = bottom-1; i>= top+1; i--){
+                grid[i][left] = list.get(idx++);
+            }
+            top++;
+            bottom--;
+            left++;
+            right--;
+
+        }
+        return grid;
+    }
+}
