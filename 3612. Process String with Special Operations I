@@ -1,0 +1,22 @@
+class Solution {
+    public String processStr(String s) {
+        StringBuilder result = new StringBuilder("");
+        for(char c : s.toCharArray()){
+            if(Character.isLowerCase(c)){
+                result.append(c);
+            }
+            if(c == '*'){
+                if(result.length() > 0){
+                    result.deleteCharAt(result.length()-1);
+                }
+            }
+            if(c == '#'){
+                result.append(result);
+            }
+            if(c == '%'){
+                result.reverse();
+            }
+        }
+        return result.toString();
+    }
+}
